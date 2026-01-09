@@ -1,138 +1,60 @@
-# NAND2TETRISPROJECTMANAGEMENTPART2-Project-11
-# NAND2TETRISPROJECTMANAGEMENTPART2-Project-11
+# Project 11 – Jack Compiler: Code Generation
 
-## Project 11 – CPU Emulator & Assembler
-
-**Project Code:** PROJECT11
-**Course:** Build a Modern Computer from First Principles (Nand2Tetris Part II)
-**Institution:** Hebrew University of Jerusalem
+**Course:** Build a Modern Computer from First Principles (Nand2Tetris Part II)  
+**Institution:** Hebrew University of Jerusalem  
+**Author:** Aravind Kumar GS  
+**Email:** aravindkumar06062006@gmail.com  
+**License:** MIT (Educational purposes only)
 
 ---
 
 ## Overview
 
-Project 11 focuses on **hardware-level emulation**, including the **Hack CPU emulator** and the **assembler**. The assembler converts `.asm` assembly files into binary `.hack` machine code, while the CPU emulator executes Hack instructions, allowing you to **run programs directly on the Hack platform**.
+Project 11 completes the **Jack compiler** by implementing **code generation**. The compiler translates Jack programs into **VM code** for the Hack platform.  
 
-This project is essential for testing the output of compiled VM code and user programs from previous projects.
+Key features include:
 
----
+- Handling **variables**: local, argument, static, field  
+- Handling **expressions**: arithmetic, logical, unary  
+- Handling **control flow**: `if`, `while`  
+- Handling **objects**: construction (`new`), method calls, manipulation  
+- Handling **arrays**: element access and assignment  
+- Producing **VM code** that can be executed using the supplied Hack VM Emulator
 
-## Objectives
-
-* Implement an **assembler** that translates Hack assembly (`.asm`) into binary machine code (`.hack`).
-* Implement a **CPU emulator** capable of executing Hack machine instructions.
-* Test arithmetic, logical, memory, and control flow operations using sample programs.
-* Debug and validate programs produced by the Jack compiler (Projects 7 & 8) and OS routines (Projects 9 & 10).
-
----
-
-## Folder Structure
-
-```
-Project11/
-│── README.md
-│── src/
-│   ├── Assembler.java
-│   └── CPUEmulator.java
-│── examples/
-│   ├── Add.asm
-│   ├── Max.asm
-│   └── Rect.asm
-│── output/
-│   ├── Add.hack
-│   ├── Max.hack
-│   └── Rect.hack
-│── docs/
-│   └── CPUEmulator_Guide.pdf
-```
+This project builds on Project 10, which performed **syntax analysis** and generated XML from Jack programs.
 
 ---
 
-## Getting Started
+## Source Files
 
-### Step 1: Compile Assembler & Emulator
-
-```bash
-cd Project11/src
-javac Assembler.java CPUEmulator.java
-```
-
-### Step 2: Assemble Hack Program
-
-```bash
-java Assembler ../examples/Add.asm
-```
-
-* Output: `Add.hack` in the `output/` folder.
-
-### Step 3: Run CPU Emulator
-
-```bash
-java CPUEmulator ../output/Add.hack
-```
-
-* Observe program execution step-by-step.
-* Use emulator debugging tools to inspect memory, registers, and stack.
+- **JackCompiler.java** or **JackCompiler.py** (main file)  
+  - Contains the **main method/function** that runs the compiler
+- Other source files for:
+  - Tokenization  
+  - Parsing  
+  - VM code generation
 
 ---
 
-## Supported Features
+## Execution Helper File
 
-### Assembler
+You must include **one** of the following:
 
-* Converts symbolic Hack assembly to binary machine code.
-* Supports A-instructions (`@value`) and C-instructions (`dest=comp;jump`).
-* Handles labels and variables.
-
-### CPU Emulator
-
-* Emulates the Hack CPU instruction set.
-* Supports memory segments: `RAM`, `ROM`, `stack`.
-* Executes arithmetic, logical, and control flow instructions.
-
-### Example
-
-**Add.asm:**
-
-```asm
-@2
-D=A
-@3
-D=D+A
-@0
-M=D
-```
-
-**Output Add.hack (binary):**
-
-```
-0000000000000010
-1110110000010000
-0000000000000011
-1110000010010000
-0000000000000000
-1110001100001000
-```
-
-**Behavior:** Stores the sum of 2 + 3 in RAM[0].
+1. **Makefile**  
+   - Automates compilation and execution of your compiler  
+2. **lang.txt**  
+   - A plain text file with **one or two terms**:  
+     - First term: programming language (`java`, `python2.7`, `python3`, etc.)  
+     - Optional second term: `debug` (to show error messages)  
+   - Example:
+     ```
+     python3 debug
+     ```
 
 ---
 
-## Notes
+## Submission Instructions
 
-* CPU Emulator is crucial for testing VM code output from Projects 8–10.
-* Provides detailed debugging support for memory, stack, and instruction flow.
-* Must verify all compiled programs for correctness before proceeding to Project 12 (Final Integration).
-
----
-
-## Author
-
-**Aravind Kumar GS**
-Email: `aravindkumar06062006@gmail.com`
-
----
-
-## License
-
-Educational purposes only. Do not distribute or claim as your own work.
+1. Place **all source files** in a single folder.  
+2. Include **lang.txt** or **makefile**.  
+3. Zip all files at the **top level** (no folders) as:
